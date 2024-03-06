@@ -6,45 +6,20 @@
 /*   By: abkacimi <abkacimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 19:24:04 by abkacimi          #+#    #+#             */
-/*   Updated: 2024/03/04 21:36:03 by abkacimi         ###   ########.fr       */
+/*   Updated: 2024/03/06 20:05:15 by abkacimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minitalk.h"
 
-
-#include <unistd.h>
-#include <stdio.h>
-#include <signal.h>
-void ft_putchar(char c)
+void	hndl_sig(int sig, siginfo_t *info, void *none)
 {
-	write(1, &c, 1);
-}
-void	ft_putnbr(int n)
-{
-	long nb;
+	static char	byte;
+	static int	i;
+	int			bit;
+	static int	sender_pid;
 
-	nb = n;
-	if (nb < 0)
-	{
-		write(1, "-", 1);
-		nb = -nb;
-	}
-	if (nb > 9)
-	{
-		ft_putchar((nb % 10) + 48);
-		ft_putnbr(nb * 10);
-	}
-	else 
-		ft_putchar(nb + 48);
-}
-
-void hndl_sig(int sig, siginfo_t *info, void *none)
-{
-	static char byte;
-	static int i;
-	int bit = 0;
-	static int sender_pid;
-
+	bit = 0;
 	if (sender_pid == 0)
 		sender_pid = info->si_pid;
 	if (sender_pid != info->si_pid)
@@ -66,22 +41,18 @@ void hndl_sig(int sig, siginfo_t *info, void *none)
 	(void)none;
 }
 
-int main(void)
+int	main(void)
 {
-    int pid;
-	struct sigaction sa;
+	struct sigaction	sa;
+	int					pid;
 
-	sa.sa_flags = SA_SIGINFO;
+	sa.sa_flags = SA_SIGINFO;// let us use sigaction if we put 0 => default behaveure dyalha
 	sa.sa_sigaction = &hndl_sig;
-
-    pid = getpid();
-    printf("%d\n", pid);
-
+	pid = getpid();
+	ft_putnbr(pid);
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-    while (1)
-    {
-        pause();
-    }
-    return (0);
+	while (1)
+		pause();
+	return (0);
 }
