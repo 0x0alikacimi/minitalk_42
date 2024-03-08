@@ -6,7 +6,7 @@
 /*   By: abkacimi <abkacimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 18:01:58 by abkacimi          #+#    #+#             */
-/*   Updated: 2024/03/06 20:03:27 by abkacimi         ###   ########.fr       */
+/*   Updated: 2024/03/08 23:59:46 by abkacimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	ft_atoi(char *str)
 	{
 		res *= 10;
 		res += str[i] - 48;
+		if (res > 99999)
+			return (0);
 		i++;
 	}
 	return (sign * res);
