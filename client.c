@@ -6,7 +6,7 @@
 /*   By: abkacimi <abkacimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:37:53 by abkacimi          #+#    #+#             */
-/*   Updated: 2024/03/09 00:01:46 by abkacimi         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:46:50 by abkacimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void	ft_send_byte(int pid, char c)
 {
-	int	b;
+	int	i;
 
-	b = 7;
-	while (b >= 0)
+	i = 7;
+	while (i >= 0)
 	{
-		if ((c >> b) & 1)
+		if (((c >> i) & 1) == 1)
 		{
 			if (kill(pid, SIGUSR1) < 0)
 			{
@@ -33,12 +33,12 @@ static void	ft_send_byte(int pid, char c)
 				ft_perror("kill error!\n");
 			}
 		}
-		usleep(500);
-		b--;
+		usleep(1337);
+		i--;
 	}
 }
 
-int checkdigits(char *s)
+static int	checkdigits(char *s)
 {
 	if (*s == '\0')
 		return (0);
@@ -49,8 +49,8 @@ int checkdigits(char *s)
 
 int	main(int ac, char **av)
 {
-	pid_t	pid;
-	int		i;
+	int	pid;
+	int	i;
 
 	if (3 == ac)
 	{

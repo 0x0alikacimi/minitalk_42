@@ -6,7 +6,7 @@
 /*   By: abkacimi <abkacimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:25:13 by abkacimi          #+#    #+#             */
-/*   Updated: 2024/03/06 19:26:02 by abkacimi         ###   ########.fr       */
+/*   Updated: 2024/03/10 20:20:17 by abkacimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINITALK_H
 
 # include <unistd.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <signal.h>
 
